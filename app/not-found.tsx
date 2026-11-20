@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import { Icon } from "@/components/icons";
 import { Button } from "@/components/ui";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = { title: "Page introuvable", robots: { index: false } };
 
-export default function NotFound() {
+export default async function NotFound() {
+  await cmsServeur();
   return (
     <section className="relative isolate overflow-hidden bg-vert-900 px-4 pt-36 pb-24 text-creme sm:pt-44">
       <img src="/img/route-soir.webp" alt="" className="absolute inset-0 -z-10 h-full w-full object-cover opacity-35" />

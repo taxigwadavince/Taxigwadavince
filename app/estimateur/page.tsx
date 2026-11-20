@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page-blocks";
 import { EstimatorTicket } from "@/components/estimator-ticket";
 import { RouteTable } from "@/components/route-table";
 import { SectionHead } from "@/components/ui";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Estimer le prix d'une course de taxi en Guadeloupe",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/estimateur" },
 };
 
-export default function Page() {
+export default async function Page() {
+  await cmsServeur();
   return (
     <>
       <PageHero kicker="Estimateur de course" title="Combien coûte votre trajet ?" mark="trajet" lead="Départ, arrivée, date et heure : visualisez votre trajet et son prix indicatif, à confirmer avec Vincent." img="/img/champs.webp" />

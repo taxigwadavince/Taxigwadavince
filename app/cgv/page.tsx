@@ -3,10 +3,12 @@ import { LegalPage, Todo } from "@/components/legal";
 import { site } from "@/lib/site";
 import { TARIFS } from "@/lib/tarifs";
 import { euro2 } from "@/lib/utils";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = { title: "Conditions de réservation", description: "Conditions de réservation des courses Taxi Gwada Vince : estimation, confirmation, paiement à bord et annulation.", alternates: { canonical: "/cgv" } };
 
-export default function Page() {
+export default async function Page() {
+  await cmsServeur();
   return (
     <LegalPage title="Conditions de réservation" updated="6 novembre 2026">
       <div>

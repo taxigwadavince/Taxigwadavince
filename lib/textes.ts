@@ -1,0 +1,25 @@
+// Textes de la page d'accueil, modifiables depuis /admin (Sanity, document « pageAccueil »).
+// Ces valeurs sont celles affichées tant qu'un champ reste vide dans l'espace de gestion.
+export const accueil = {
+  heroTitre: "Votre taxi en Guadeloupe,",
+  heroAccent: "à l'heure, jour et nuit.",
+  servicesTitre: "Un taxi pour chaque trajet",
+  servicesMot: "chaque",
+  departsTitre: "Vous atterrissez ? Votre taxi est prêt.",
+  departsMot: "prêt",
+  departsIntro: "Les trajets les plus demandés depuis l'aéroport, prix de jour indicatif.",
+  reservationTitre: "Réserver prend 2 minutes",
+  reservationMot: "2 minutes",
+  chauffeurTitre: "Vincent, alias Gwada Vince",
+  chauffeurMot: "Gwada Vince",
+  chauffeurCitation: "« Passionné de voyages et de rencontres, je vous fais découvrir la Guadeloupe autrement. Chaque trajet doit être sûr, confortable et à l'heure. »",
+  chauffeurPhoto: "/img/interieur-duster.webp",
+  atouts: ["Ponctuel, même à 5 h du matin", "Véhicule entretenu et confortable", "Carte ou espèces, reçu remis", "Confirmation et suivi par WhatsApp"],
+  avisTitre: "80 voyageurs le recommandent",
+  avisMot: "recommandent",
+  faqTitre: "Vos questions, nos réponses",
+  faqMot: "réponses",
+  finTitre: "Une course à prévoir ?",
+  finMot: "course",
+  finTexte: "Envoyez votre demande et convenez de votre trajet avec Vincent. De jour comme de nuit.",
+};

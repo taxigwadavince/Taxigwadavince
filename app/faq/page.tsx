@@ -5,6 +5,7 @@ import { Glyph, Icon } from "@/components/icons";
 import { Button, Kicker, Reveal, Title } from "@/components/ui";
 import { faqSections } from "@/lib/faq";
 import { site, whatsappLink } from "@/lib/site";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Questions fréquentes : votre taxi en Guadeloupe",
@@ -18,7 +19,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  await cmsServeur();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

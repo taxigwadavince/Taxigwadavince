@@ -6,6 +6,7 @@ import { TariffPanels } from "@/components/tariff-panels";
 import { RouteCards } from "@/components/route-cards";
 import { SectionHead, Reveal, Button, Kicker, Title } from "@/components/ui";
 import { Icon } from "@/components/icons";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Tarifs et services du taxi en Guadeloupe",
@@ -13,7 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/tarifs" },
 };
 
-export default function Page() {
+export default async function Page() {
+  await cmsServeur();
   return (
     <>
       <TarifsHero />

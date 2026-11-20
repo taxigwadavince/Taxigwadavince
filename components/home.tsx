@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import { site, whatsappLink } from "@/lib/site";
 import { faq } from "@/lib/content";
+import { accueil as t } from "@/lib/textes";
 import { useHeroLock } from "./hero-lock";
 import { Button, Reveal, SectionHead, Title, Lead, Kicker } from "./ui";
 import { Icon } from "./icons";
@@ -145,7 +146,7 @@ function Hero() {
           <span className="tabular">5,0 sur Google · {site.reviewsCount} avis</span>
         </motion.p>
         <motion.h1 {...fade(0.35)} className="mt-3 max-w-[16ch] font-display text-[clamp(1.9rem,8vw,2.4rem)] font-bold text-white land:max-w-[15ch] land:text-[min(3.6vw,6.4vh)]" style={{ lineHeight: 1.02 }}>
-          Votre taxi en Guadeloupe, <span className="text-soleil">à l&apos;heure, jour et nuit.</span>
+          {t.heroTitre} <span className="text-soleil">{t.heroAccent}</span>
         </motion.h1>
         <motion.div {...fade(0.65)} className="mt-6 flex flex-wrap gap-3">
           <Cta href="/reserver" className="h-12 pl-5 land:h-13 land:pl-6">
@@ -170,7 +171,7 @@ export function Home() {
       {/* MCP: "hover image reveal list" -> Hover Image List (21st.dev #28258), voir components/services-index.tsx */}
       <section className="relative overflow-hidden bg-creme py-16 sm:py-24">
         <div className="px-4">
-          <SectionHead kicker="Services" kickerIcon="ph:steering-wheel-bold" title="Un taxi pour chaque trajet" mark="chaque" />
+          <SectionHead kicker="Services" kickerIcon="ph:steering-wheel-bold" title={t.servicesTitre} mark={t.servicesMot} />
         </div>
         <ServicesIndex />
         <Reveal className="mt-10 flex justify-center px-4">
@@ -183,7 +184,7 @@ export function Home() {
       {/* Départs : grille de cartes simple (retour Tom 26/10, tableau à volets jugé trop original), voir components/departure-board.tsx */}
       <section className="relative overflow-hidden bg-vert-900 bg-cover bg-center py-16 text-creme sm:py-24" style={{ backgroundImage:"url(/img/texture-vert.webp)" }}>
         <div className="px-4">
-          <SectionHead tone="sombre" kicker="Départs" kickerIcon="ph:paper-plane-tilt-bold" title="Vous atterrissez ? Votre taxi est prêt." mark="prêt" lead="Les trajets les plus demandés depuis l'aéroport, prix de jour indicatif." />
+          <SectionHead tone="sombre" kicker="Départs" kickerIcon="ph:paper-plane-tilt-bold" title={t.departsTitre} mark={t.departsMot} lead={t.departsIntro} />
         </div>
         <div className="px-3">
           <DepartureBoard />
@@ -198,7 +199,7 @@ export function Home() {
       {/* MCP: "timeline steps" -> Vertical How It Works Timeline (21st.dev #26902), voir components/road-steps.tsx */}
       <section className="grain relative bg-creme py-16 sm:py-24">
         <div className="px-4">
-          <SectionHead kicker="Réservation" kickerIcon="ph:calendar-blank-bold" title="Réserver prend 2 minutes" mark="2 minutes" />
+          <SectionHead kicker="Réservation" kickerIcon="ph:calendar-blank-bold" title={t.reservationTitre} mark={t.reservationMot} />
         </div>
         <RoadSteps />
         <Reveal className="mt-14 flex justify-center px-4">
@@ -219,7 +220,7 @@ export function Home() {
               transition={{ duration: 1.2, ease: EASE }}
               className="aspect-[4/3] overflow-hidden"
             >
-              <img src="/img/interieur-duster.webp" alt="Vincent au volant de son Dacia Duster, vu depuis la place passager" className="h-full w-full object-cover" />
+              <img src={t.chauffeurPhoto} alt="Vincent au volant de son Dacia Duster, vu depuis la place passager" className="h-full w-full object-cover" />
             </motion.div>
             <Reveal dir="scale" delay={0.6} className="absolute -bottom-6 left-4 sm:left-8">
               {/* Logos fournis par Vincent (16/11/2026) : Association Taxi Gwadloup et UNT Guadeloupe, affichés en petit. */}
@@ -238,19 +239,14 @@ export function Home() {
             <Reveal>
               <Kicker icon="ph:steering-wheel-bold">Votre chauffeur</Kicker>
             </Reveal>
-            <Title text="Vincent, alias Gwada Vince" mark="Gwada Vince" center={false} className="mt-5 lg:mx-0" />
+            <Title text={t.chauffeurTitre} mark={t.chauffeurMot} center={false} className="mt-5 lg:mx-0" />
             <Reveal delay={0.1}>
               <p className="mx-auto mt-5 max-w-xl text-[1.05rem] leading-relaxed text-gris lg:mx-0">
-                « Passionné de voyages et de rencontres, je vous fais découvrir la Guadeloupe autrement. Chaque trajet doit être sûr, confortable et à l&apos;heure. »
+                {t.chauffeurCitation}
               </p>
             </Reveal>
             <ul className="mx-auto mt-8 grid max-w-xl gap-3 text-left sm:grid-cols-2 lg:mx-0">
-              {[
-                { i: "ph:clock-countdown-bold", t: "Ponctuel, même à 5\u00a0h du matin" },
-                { i: "ph:shield-check-bold", t: "Véhicule entretenu et confortable" },
-                { i: "ph:credit-card-bold", t: "Carte ou espèces, reçu remis" },
-                { i: "ph:whatsapp", t: "Confirmation et suivi par WhatsApp" },
-              ].map((x, k) => (
+              {t.atouts.slice(0, 4).map((texte, k) => ({ i: ["ph:clock-countdown-bold", "ph:shield-check-bold", "ph:credit-card-bold", "ph:whatsapp"][k], t: texte })).map((x, k) => (
                 <Reveal key={x.t} delay={0.1 + k * 0.08}>
                   <li className="flex items-center gap-3 rounded-[16px] bg-white/70 px-4 py-3 font-medium text-vert-900">
                     <Icon name={x.i === "ph:whatsapp" ? "si:whatsapp" : x.i} className="size-5 text-vert" />
@@ -279,7 +275,7 @@ export function Home() {
           <Reveal delay={0.1}>
             <p className="mt-5 font-sans text-[clamp(3rem,7vw,4.5rem)] leading-none font-bold text-soleil tabular">5,0</p>
           </Reveal>
-          <Title tone="sombre" text="80 voyageurs le recommandent" mark="recommandent" className="mt-3 text-[clamp(1.7rem,3.6vw,2.6rem)]" />
+          <Title tone="sombre" text={t.avisTitre} mark={t.avisMot} className="mt-3 text-[clamp(1.7rem,3.6vw,2.6rem)]" />
         </div>
         <ReviewsMarquee rows={1} />
         <Reveal className="mt-8 flex justify-center px-4">
@@ -292,7 +288,7 @@ export function Home() {
       {/* MCP: "faq accordion" -> Accordion (21st.dev #23530), voir components/faq-list.tsx */}
       <section className="relative bg-creme py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-4">
-          <SectionHead kicker="Questions" kickerIcon="ph:info-bold" title="Vos questions, nos réponses" mark="réponses" />
+          <SectionHead kicker="Questions" kickerIcon="ph:info-bold" title={t.faqTitre} mark={t.faqMot} />
           <Reveal className="mt-12">
             <FaqList items={faq.slice(0, 6)} />
           </Reveal>
@@ -312,9 +308,9 @@ export function Home() {
         <Reveal dir="scale" className="mx-auto max-w-[1280px]">
           <div className="relative isolate overflow-hidden rounded-[32px] bg-vert-900 bg-cover bg-center px-6 py-16 sm:px-14 sm:py-24" style={{ backgroundImage:"linear-gradient(90deg,rgba(5,40,20,0.82) 0%,rgba(5,40,20,0.5) 55%,rgba(5,40,20,0.15) 100%),url(/img/route-soir.webp)" }}>
             <div className="max-w-xl text-center sm:text-left">
-              <Title tone="sombre" text={"Une course à prévoir\u00a0?"} mark="course" center={false} className="sm:mx-0" />
+              <Title tone="sombre" text={t.finTitre} mark={t.finMot} center={false} className="sm:mx-0" />
               <Lead tone="sombre" className="sm:mx-0 sm:text-left">
-                Envoyez votre demande et convenez de votre trajet avec Vincent. De jour comme de nuit.
+                {t.finTexte}
               </Lead>
               <div className="mt-8 flex justify-center sm:justify-start">
                 <Cta href="/reserver">Réserver ma course</Cta>
@@ -328,7 +324,7 @@ export function Home() {
                 <Icon name="si:whatsapp" className="size-4 text-or" /> WhatsApp
               </a>
               <span className="inline-flex items-center gap-2">
-                <Icon name="ph:clock-bold" className="size-4 text-or" /> 24h/24, 7j/7 · Le Gosier, Guadeloupe
+                <Icon name="ph:clock-bold" className="size-4 text-or" /> {site.hours} · Le Gosier, Guadeloupe
               </span>
             </div>
           </div>

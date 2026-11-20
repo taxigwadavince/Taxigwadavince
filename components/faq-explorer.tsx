@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { faqCount, faqSections } from "@/lib/faq";
+import { faqSections } from "@/lib/faq";
 import { site, whatsappLink } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { FaqList } from "./faq-list";
@@ -39,7 +39,7 @@ export function FaqExplorer() {
           <p className="text-xs font-semibold tracking-[0.18em] text-gris uppercase">Votre itinéraire</p>
           <h2 id="questions-title" className="mt-3 font-display text-3xl font-bold text-vert-900">Une question,<br className="hidden lg:block" /> un arrêt.</h2>
           <div role="group" aria-label="Filtrer les questions par thème" className="mt-6 flex flex-wrap gap-2 lg:mt-8 lg:flex-col lg:gap-1">
-            {[{ id: "all", label: "Toutes les questions", count: faqCount }, ...faqSections.map((section) => ({ ...section, count: section.items.length }))].map((item, i) => (
+            {[{ id: "all", label: "Toutes les questions", count: faqSections.reduce((n, s) => n + s.items.length, 0) }, ...faqSections.map((section) => ({ ...section, count: section.items.length }))].map((item, i) => (
               <button
                 key={item.id}
                 type="button"

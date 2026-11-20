@@ -7,6 +7,9 @@ import { FloatingCta } from "@/components/floating-cta";
 import { FloatingWhatsapp } from "@/components/floating-whatsapp";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { site } from "@/lib/site";
+import { cmsServeur } from "@/lib/cms";
+import { CmsClient } from "@/components/cms-client";
+import { SiteOnly } from "@/components/site-only";
 
 // Typo de la marque conservée (site actuel) : Syne pour les titres, Poppins pour le texte.
 const syne = Syne({ subsets: ["latin"], weight: ["600", "700", "800"], variable: "--font-syne", display: "swap" });
@@ -40,7 +43,8 @@ export const viewport: Viewport = { themeColor: "#0a4624", width: "device-width"
 // les bandeaux mobiles qui tiennent sur un écran ne grandissent plus quand la barre du navigateur se replie au défilement.
 const ecranH = `(function(){var d=document.documentElement,w=-1;function f(){if(innerWidth!==w){w=innerWidth;d.style.setProperty("--ecran-h",innerHeight+"px")}}f();addEventListener("resize",f)})()`;
 
-const jsonLd = {
+function jsonLdSite() {
+  return {
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -61,20 +65,22 @@ const jsonLd = {
       paymentAccepted: "Cash, Credit Card",
     },
   ],
-};
+  };
+}
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const cms = await cmsServeur();
+  const jsonLd = jsonLdSite();
   return (
     <html lang="fr" data-scroll-behavior="smooth" className={`${syne.variable} ${poppins.variable}`} suppressHydrationWarning>
       <body className="antialiased">
         <script dangerouslySetInnerHTML={{ __html: ecranH }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <ScrollProgress />
-        <Navbar />
-        <main className="overflow-x-clip">{children}</main>
-        <Footer />
-        <FloatingCta />
-        <FloatingWhatsapp />
+        <CmsClient data={cms}>
+          <SiteOnly><ScrollProgress /><Navbar /></SiteOnly>
+          <main className="overflow-x-clip">{children}</main>
+          <SiteOnly><Footer /><FloatingCta /><FloatingWhatsapp /></SiteOnly>
+        </CmsClient>
       </body>
     </html>
   );

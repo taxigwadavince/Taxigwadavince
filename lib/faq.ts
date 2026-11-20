@@ -105,4 +105,4 @@ export const faqSections: FaqSection[] = [
   },
 ];
 
-export const faqCount = faqSections.reduce((total, section) => total + section.items.length, 0);
+

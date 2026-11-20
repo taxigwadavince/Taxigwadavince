@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { LegalPage, Todo } from "@/components/legal";
 import { gmailLink, site } from "@/lib/site";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = { title: "Politique de confidentialité", description: "Comment Taxi Gwada Vince utilise et protège les données transmises lors d'une demande de course, et comment exercer vos droits.", alternates: { canonical: "/confidentialite" } };
 
-export default function Page() {
+export default async function Page() {
+  await cmsServeur();
   return (
     <LegalPage title="Politique de confidentialité" updated="24 octobre 2026">
       <div>

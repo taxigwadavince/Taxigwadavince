@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { BookingForm } from "@/components/booking-form";
 import { PageHero } from "@/components/page-blocks";
 import { WaysToBook } from "@/components/ways-to-book";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Réserver un taxi en Guadeloupe en ligne",
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/reserver" },
 };
 
-export default function Page() {
+export default async function Page() {
+  await cmsServeur();
   return (
     <>
       <PageHero kicker="Réservation" title="Réservez votre course" mark="course" lead="Quatre étapes, aucun paiement en ligne : Vincent confirme votre prise en charge." img="/img/aeroport.webp" />

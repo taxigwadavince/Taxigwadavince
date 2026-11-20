@@ -12,6 +12,7 @@ import { PlacePicker, decodePlace, type PickedPlace } from "./place-picker";
 import { Icon } from "./icons";
 import { Button } from "./ui";
 import { Ticket } from "./ticket";
+import { site } from "@/lib/site";
 import { getRoute, type RouteResult } from "@/lib/route";
 import { estimate, TARIFS } from "@/lib/tarifs";
 import { cn, duree, euro2 } from "@/lib/utils";
@@ -127,10 +128,25 @@ export function BookingForm() {
       const res = await fetch("/api/reservation", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const json = await res.json();
       if (!res.ok || !json.ref) throw new Error(json.error || "Envoi impossible");
-      const q = new URLSearchParams({ ref: json.ref, from: payload.from ?? "", to: payload.to ?? "", quand: `${dateFr} à ${time} (heure de Guadeloupe)`, pax: paxText, est: estText, sent: json.sent ? "1" : "0" });
+      // E-mail à Vincent via Web3Forms, envoyé depuis le navigateur (clé publique ; l'offre gratuite refuse les envois serveur)
+      let sent = false;
+      const cle = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+      if (cle && json.mail) {
+        try {
+          const r = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({ access_key: cle, subject: json.mail.subject, from_name: "Site Taxi Gwada Vince", replyto: json.mail.replyto || undefined, message: json.mail.text, botcheck: "" }),
+          });
+          sent = r.ok && (await r.json().catch(() => ({}))).success === true;
+        } catch {
+          sent = false;
+        }
+      }
+      const q = new URLSearchParams({ ref: json.ref, from: payload.from ?? "", to: payload.to ?? "", quand: `${dateFr} à ${time} (heure de Guadeloupe)`, pax: paxText, est: estText, sent: sent ? "1" : "0" });
       router.push(`/reserver/merci?${q.toString()}`);
     } catch {
-      setSendError("L'envoi n'a pas abouti. Réessayez ou appelez Vincent au 0690 64 75 63.");
+      setSendError(`L'envoi n'a pas abouti. Réessayez ou appelez Vincent au ${site.phoneDisplay}.`);
       setSending(false);
     }
   };

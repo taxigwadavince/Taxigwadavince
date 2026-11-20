@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { site, whatsappLink } from "@/lib/site";
 import { Icon } from "@/components/icons";
 import { Button } from "@/components/ui";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Demande de réservation enregistrée",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 type SP = Promise<Record<string, string | undefined>>;
 
 export default async function Page({ searchParams }: { searchParams: SP }) {
+  await cmsServeur();
   const raw = await searchParams;
   // Valeurs reprises de l'adresse : bornées en longueur ; sans référence, la page n'a pas lieu d'être.
   const p = Object.fromEntries(Object.entries(raw).map(([k, v]) => [k, (v ?? "").slice(0, 120)]));

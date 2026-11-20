@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { LegalPage, Todo } from "@/components/legal";
 import { gmailLink, site } from "@/lib/site";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = { title: "Mentions légales", description: "Mentions légales du site Taxi Gwada Vince : éditeur, hébergeur et propriété intellectuelle.", alternates: { canonical: "/mentions-legales" } };
 
-export default function Page() {
+export default async function Page() {
+  await cmsServeur();
   return (
     <LegalPage title="Mentions légales" updated="12 novembre 2026">
       <div>

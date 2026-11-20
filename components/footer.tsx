@@ -88,7 +88,12 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 pb-20 text-sm text-creme/85 sm:flex-row sm:items-center sm:justify-between lg:pb-0">
-          <p>© {new Date().getFullYear()} Taxi Gwada Vince. Tous droits réservés.</p>
+          <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <span>© {new Date().getFullYear()} Taxi Gwada Vince. Tous droits réservés.</span>
+            <Link href="/admin" prefetch={false} rel="nofollow" className="inline-flex min-h-11 items-center gap-1.5 text-creme/70 transition-colors hover:text-white">
+              <Icon name="ph:lock-bold" className="size-3.5" /> Espace administration
+            </Link>
+          </p>
           <p>
             Site réalisé par{" "}
             <a href={site.credit.href} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center font-semibold text-soleil underline-offset-4 hover:underline">

@@ -1,16 +1,24 @@
 import { NextResponse } from "next/server";
+import { sanityCreate } from "@/lib/sanity";
 import { clampInt, dateError, isValidEmail, isValidName, isValidPhone, isValidTime, LIMITS } from "@/lib/validation";
 
 // Réception d'une demande de réservation.
-// Envoi par e-mail via Web3Forms (WEB3FORMS_KEY) ou Resend (RESEND_API_KEY + RESERVATION_TO), selon la clé présente.
-// Sans clé : la référence est créée et la page de confirmation invite à envoyer la demande par WhatsApp.
+// La demande est enregistrée dans Sanity (espace /admin de Vincent), puis le navigateur l'envoie par e-mail (Web3Forms).
+// Si l'e-mail ne part pas, la page de confirmation invite à envoyer la demande par WhatsApp.
 // Les règles de saisie sont revérifiées ici : le formulaire ne suffit pas à garantir les données reçues.
 type Payload = Record<string, string | number | boolean | null | undefined>;
 
 const clean = (v: unknown, max = 300) => String(v ?? "").replace(/[<>]/g, "").slice(0, max).trim();
 const CONTACTS = ["WhatsApp", "Appel", "E-mail"];
 
+// Limite simple contre les envois en rafale (par instance serveur) : 6 demandes par quart d'heure et par adresse
+const envois = new Map<string, number[]>();
+
 export async function POST(req: Request) {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "inconnue";
+  const recents = (envois.get(ip) ?? []).filter((t) => Date.now() - t < 15 * 60_000);
+  if (recents.length >= 6) return NextResponse.json({ error: "Trop de demandes. Appelez Vincent directement." }, { status: 429 });
+  envois.set(ip, [...recents, Date.now()]);
   let body: Payload;
   try {
     body = await req.json();
@@ -60,26 +68,34 @@ export async function POST(req: Request) {
   const text = lines.join("\n");
   const subject = `Nouvelle course ${ref} : ${clean(from, 60)} → ${clean(to, 60)}`;
 
-  let sent = false;
-  try {
-    if (process.env.WEB3FORMS_KEY) {
-      const r = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ access_key: process.env.WEB3FORMS_KEY, subject, from_name: "Site Taxi Gwada Vince", replyto: email || undefined, message: text }),
-      });
-      sent = r.ok;
-    } else if (process.env.RESEND_API_KEY && process.env.RESERVATION_TO) {
-      const r = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ from: process.env.RESERVATION_FROM || "Taxi Gwada Vince <onboarding@resend.dev>", to: [process.env.RESERVATION_TO], reply_to: email || undefined, subject, text }),
-      });
-      sent = r.ok;
-    }
-  } catch {
-    sent = false;
-  }
+  // Enregistrement dans l'espace de Vincent (/admin > Réservations reçues). Identifiant « resa.… » : document privé,
+  // jamais lisible sans la clé du serveur (le jeu de données Sanity est public en lecture).
+  const enregistree = await sanityCreate({
+    _id: `resa.${ref}`,
+    _type: "reservation",
+    statut: "nouvelle",
+    reference: ref,
+    date,
+    heure: time,
+    depart: from,
+    arrivee: to,
+    nom: name,
+    telephone: phone,
+    email: email || undefined,
+    contact,
+    adultes: adults,
+    enfants: children,
+    valises: bags,
+    siegeEnfant: body.childSeat === true,
+    vol: body.flight ? clean(body.flight, LIMITS.flight) : undefined,
+    heuresSupp: extraHours || undefined,
+    estimation: clean(body.estimate, 30) || undefined,
+    km: body.km ? clean(body.km, 10) : undefined,
+    message: body.note ? clean(body.note, LIMITS.note) : undefined,
+    creeLe: new Date().toISOString(),
+  });
+  if (!enregistree) console.error("reservation : enregistrement Sanity impossible", ref);
 
-  return NextResponse.json({ ok: true, ref, sent });
+  // L'e-mail part du navigateur (Web3Forms, offre gratuite = envoi côté client uniquement) : on renvoie son contenu.
+  return NextResponse.json({ ok: true, ref, enregistree, mail: { subject, text, replyto: email || "" } });
 }

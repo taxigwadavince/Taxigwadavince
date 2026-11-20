@@ -1,7 +1,9 @@
 import { Home } from "@/components/home";
 import { faq } from "@/lib/content";
+import { cmsServeur } from "@/lib/cms";
 
-export default function Page() {
+export default async function Page() {
+  await cmsServeur();
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

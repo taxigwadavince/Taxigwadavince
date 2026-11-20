@@ -8,6 +8,7 @@ import { ReviewQuotes } from "@/components/review-quotes";
 import { Values } from "@/components/values";
 import { Icon } from "@/components/icons";
 import { DEFAULT_DRIVER_CARD_STYLE, isDriverCardStyle } from "@/lib/driver-card-styles";
+import { cmsServeur } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Vincent, votre chauffeur de taxi de confiance en Guadeloupe",
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ carte?: string | string[] }> }) {
+  await cmsServeur();
   const { carte } = await searchParams;
   const preview = isDriverCardStyle(carte);
   const cardStyle = isDriverCardStyle(carte) ? carte : DEFAULT_DRIVER_CARD_STYLE;
