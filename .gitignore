@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
+.env*
+
+# notes et outils internes Fondation Studio (restent en local)
+/*.md
+!/README.md
+/.vercel-ancien-compte/
+/output/
+/tmp-*.mjs
+/shoot.mjs
+/flow.mjs

@@ -1,0 +1,133 @@
+.shell { container-type: inline-size; width: 100%; color: #052814; }
+.card { position: relative; width: 100%; overflow: hidden; border-radius: 26px; box-shadow: 0 30px 60px -25px #00180e70; }
+.card h2 { font-family: var(--font-syne), sans-serif; letter-spacing: -.045em; font-weight: 700; }
+.portrait { position: relative; width: 100%; height: 100%; min-height: 0; overflow: hidden; border-radius: inherit; background: #d3d8b7; }
+.portrait img { object-fit: cover; object-position: 50% 40%; }
+.portraitLogo { display: grid; place-items: center; background: radial-gradient(circle at 50% 40%, #13603a, #052814 75%); }
+.portraitLogo img { width: 62%; height: auto; max-width: 220px; aspect-ratio: 1; object-fit: contain; border-radius: 50%; box-shadow: 0 18px 40px -18px rgba(0,0,0,.6); }
+.eyebrow { font-size: clamp(8px, 1.8cqw, 10px); font-weight: 600; line-height: 1.5; letter-spacing: .16em; text-transform: uppercase; }
+.rating { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: clamp(10px, 2.5cqw, 13px); white-space: nowrap; }
+.rating strong { font-family: "Chiffres", sans-serif; }
+.stars { display: flex; gap: 1px; color: #c9a500; }
+.stars svg { width: clamp(10px, 2.6cqw, 13px); height: clamp(10px, 2.6cqw, 13px); }
+.ratingLabel { font-size: clamp(8px, 1.8cqw, 10px); opacity: .7; }
+.association { display: inline-flex; align-items: center; gap: 7px; font-size: clamp(8px, 2.15cqw, 11px); font-weight: 500; line-height: 1.5; }
+.association > svg { flex-shrink: 0; width: 18px; height: 18px; color: #b8930a; }
+
+/* 01 · Carte d'origine, avec photographie et détails de badge. */
+.badgeWrap { position: relative; padding-top: 16px; }
+.clip { position: absolute; top: 0; left: 50%; z-index: 2; width: 19%; height: 38px; transform: translateX(-50%); border-radius: 0 0 12px 12px; background: #dab211; box-shadow: 0 5px 12px #05281420; }
+.clip::after { position: absolute; content: ""; top: 8px; left: 25%; width: 50%; height: 7px; border-radius: 8px; background: #576417; }
+.classic { background: #fbfaf4; }
+.guilloche { position: absolute; inset: 0; width: 100%; height: 100%; color: #0a462410; pointer-events: none; }
+.classicHeader { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 19px 5.4% 15px; background: #052814; color: #ffe178; font-size: clamp(8px, 2cqw, 11px); font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }
+.classicHeader strong { color: #f7f5ee; font-family: "Chiffres", sans-serif; font-size: 13px; }
+.checker { height: 8px; background: repeating-conic-gradient(#ffe178 0 25%, #052814 0 50%) 0 0 / 18px 18px; }
+.classicBody { position: relative; display: grid; grid-template-columns: 28% minmax(0, 1fr); align-items: center; gap: 5%; padding: 5.4%; }
+.badgePhoto { position: relative; aspect-ratio: 4/5; border-radius: 13px; box-shadow: 0 0 0 4px #fff; }
+.hologram { position: absolute; display: grid; place-items: center; right: -9px; bottom: -8px; width: 34%; aspect-ratio: 1; border-radius: 50%; background: conic-gradient(from 40deg, #ffe178, #e2f4ea, #dab211, #a7d8c3, #ffe178); box-shadow: 0 0 0 2px #fff; color: #526b3180; }
+.hologram svg { width: 52%; height: 52%; }
+.details { display: grid; gap: clamp(4px, 1.4cqw, 8px); }
+.details > div { display: grid; grid-template-columns: 27% minmax(0,1fr); align-items: baseline; gap: 7px; }
+.details dt { color: #57765d; font-size: clamp(7px, 1.85cqw, 10px); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
+.details dd { font-size: clamp(9px, 2.65cqw, 14px); font-weight: 600; line-height: 1.4; }
+.details > div:first-child dd { font-family: var(--font-syne), sans-serif; font-size: clamp(15px, 4cqw, 22px); }
+.classicFooter { position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 9px; padding: 15px 5.4%; border-top: 1px dashed #0a462433; }
+
+/* 02 · Carte vert profond retenue, d’après la référence fournie. */
+.deepGreen { display: grid; grid-template-columns: 64.3% minmax(0, 1fr); aspect-ratio: 16/9; border: 2px solid #91b77b; border-radius: clamp(16px, 3.3cqw, 22px); background: #0b371d; color: #fbf6df; }
+.deepGreen::before { position: absolute; inset: 0 auto 0 0; width: max(4px, .85cqw); content: ""; background: #f1cf00; }
+.deepGreenContent { display: flex; flex-direction: column; min-width: 0; padding: 3.1cqw 4.5cqw 3.1cqw 5cqw; }
+.deepGreenHeader { position: relative; padding-right: 8cqw; }
+.deepGreenHeader p { font-size: 2.6cqw; font-weight: 600; line-height: 1.3; letter-spacing: .11em; text-transform: uppercase; }
+.deepGreenHeader > svg { position: absolute; top: 0; right: 0; width: 6.7cqw; height: 6.7cqw; }
+.deepGreen .deepGreenName { margin-top: 1.6cqw; font-family: var(--font-poppins), sans-serif; font-size: 9cqw; font-weight: 700; line-height: 1.08; letter-spacing: -.035em; }
+.deepGreenAlias { margin-top: .3cqw; color: #f1cf00; font-size: 5.4cqw; font-weight: 700; line-height: 1.2; letter-spacing: -.035em; white-space: nowrap; }
+.deepGreenDetails { display: grid; margin-top: 2cqw; }
+.deepGreenDetails li { display: flex; align-items: center; gap: 2.3cqw; padding-block: 1.2cqw; font-size: 3.15cqw; font-weight: 600; line-height: 1.4; }
+.deepGreenDetails li + li { border-top: 1px solid #91b77b; }
+.deepGreenDetails svg { width: 4.4cqw; height: 4.4cqw; flex-shrink: 0; color: #f1cf00; }
+.deepGreenAssociation { margin-top: auto; padding-top: 2.1cqw; font-size: 2.1cqw; font-weight: 600; line-height: 1.4; letter-spacing: -.035em; }
+.deepGreenPhoto { position: relative; overflow: hidden; min-width: 0; border-radius: 5cqw 0 0 5cqw; }
+.deepGreenPhoto .portrait { position: absolute; inset: 0; }
+.deepGreenPhoto img { object-position: 50% 40%; }
+
+/* 03 · Mise en page éditoriale, photographie au premier plan. */
+.editorial { display: grid; grid-template-columns: 43% minmax(0,1fr); background: #fbfaf4; }
+.editorialPhoto { position: relative; min-height: 290px; }
+.editorialPhoto .portrait { position: absolute; inset: 0; border-radius: 0; }
+.editorialPhoto img { object-position: 50% 38%; }
+.editorialPhoto::after { position: absolute; inset: 55% 0 0; content: ""; background: linear-gradient(transparent, #052814b3); }
+.photoLabel { position: absolute; z-index: 1; bottom: 19px; left: 12%; color: #fff; font-size: clamp(7px, 1.7cqw, 9px); font-weight: 500; letter-spacing: .15em; }
+.editorialBody { padding: 11% 11% 9%; }
+.editorialBody .eyebrow { display: flex; align-items: center; gap: 6px; font-size: clamp(7px, 1.6cqw, 9px); letter-spacing: .08em; color: #57765d; }
+.editorialBody .eyebrow > span { width: 5px; height: 5px; border-radius: 50%; background: #c9a500; }
+.editorialBody h2 { margin-top: 12px; font-size: clamp(26px, 7.6cqw, 42px); line-height: 1; }
+.editorialBody h2 > span { color: #c9a500; }
+.editorialTagline { margin-top: 15px; font-size: clamp(10px, 2.7cqw, 15px); font-weight: 500; line-height: 1.5; }
+.editorialDetails { display: grid; gap: 10px; margin-top: 20px; padding-top: 16px; border-top: 1px solid #0a46241f; }
+.editorialDetails dt { color: #57765d; font-size: clamp(7px, 1.7cqw, 9px); }
+.editorialDetails dd { margin-top: 2px; font-size: clamp(9px, 2.2cqw, 12px); font-weight: 600; }
+.editorialBody > .rating { margin-top: 20px; }
+.editorialFooter { grid-column: 1/-1; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 5%; background: #edce4d; }
+.editorialFooter > svg { width: 22px; height: 22px; }
+.editorialFooter .association > svg { color: #052814; }
+
+/* 04 · Billet de voyage avec encoches et ligne de trajet. */
+.ticket { border-radius: 18px; background: #fbfaf4; }
+.ticketHeader { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 5.4%; background: #e5c51c; font-size: clamp(8px, 2.2cqw, 12px); font-weight: 700; letter-spacing: .1em; }
+.ticketHeader > span { display: flex; align-items: center; gap: 10px; }
+.ticketHeader svg { width: 23px; height: 23px; }
+.ticketHeader strong { font-family: "Chiffres", sans-serif; }
+.ticketBody { padding: 6% 6% 5%; }
+.ticketIdentity { display: grid; grid-template-columns: 20% minmax(0, 1fr) 16%; gap: 5%; align-items: center; }
+.ticketIdentity > .portrait { height: auto; aspect-ratio: 4/5; border-radius: 9px; }
+.ticketIdentity h2 { margin-top: 2px; font-size: clamp(25px, 7cqw, 38px); line-height: 1.1; }
+.ticketIdentity .eyebrow { color: #57765d; }
+.ticketAlias { margin-top: 3px; font-size: clamp(9px, 2.3cqw, 12px); }
+.ticketIdentity .association { margin-top: 7px; font-size: clamp(7px, 1.9cqw, 10px); }
+.ticketSeal { display: grid; justify-items: center; gap: 4px; padding-block: 12px; border: 1px solid #0a462440; border-radius: 50%; aspect-ratio: 1; transform: rotate(12deg); color: #0a4624b3; }
+.ticketSeal svg { width: 24px; height: 24px; }
+.ticketSeal > span { font-size: clamp(5px, 1.3cqw, 7px); font-weight: 600; letter-spacing: .05em; line-height: 1.4; text-align: center; }
+.route { display: grid; grid-template-columns: auto minmax(10px,1fr) auto; align-items: center; gap: 14px; margin-top: 24px; }
+.route > div > span { display: block; color: #57765d; font-size: clamp(7px, 1.8cqw, 10px); }
+.route strong { display: block; margin-top: 3px; font-size: clamp(10px, 2.7cqw, 15px); font-weight: 600; }
+.routeLine { display: flex; align-items: center; gap: 4px; padding-top: 12px; }
+.routeLine > span { width: 6px; height: 6px; flex-shrink: 0; border: 1px solid #0a4624; border-radius: 50%; }
+.routeLine > i { flex: 1; border-top: 1px dashed #0a462455; }
+.routeLine svg { width: 14px; height: 14px; }
+.ticketFooter { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 19px 6%; border-top: 1px dashed #0a46244d; background: #f0efe5; }
+.ticket { mask: radial-gradient(circle 10px at 0 calc(100% - 81px), transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 10px at 100% calc(100% - 81px), transparent 98%, #000) right / 51% 100% no-repeat; }
+.ticketFooter > div > strong { display: block; margin-top: 3px; font-family: "Chiffres", var(--font-poppins), sans-serif; font-size: clamp(10px, 2.7cqw, 14px); }
+.ticketFooter .eyebrow { font-size: clamp(7px, 1.5cqw, 8px); color: #57765d; }
+.ticketMark { font-family: var(--font-syne), sans-serif; font-size: 9px; letter-spacing: .14em; line-height: 1.2; border-left: 1px solid #0a46242b; padding-left: 18px; }
+.ticketMark > strong { margin-top: 0 !important; font-size: 13px !important; }
+
+@container (max-width: 380px) {
+  .card { border-radius: 19px; }
+  .classicBody { gap: 6%; padding-block: 20px; }
+  .classicFooter { gap: 7px; padding-block: 12px; }
+  .classicFooter .association { max-width: 65%; }
+  .classicFooter .rating { gap: 4px; }
+  .classicFooter .stars svg { width: 8px; height: 8px; }
+  .deepGreen { aspect-ratio: auto; min-height: 235px; border-radius: 16px; }
+  .deepGreenContent { padding: 14px 12px 12px 16px; }
+  .deepGreenHeader { padding-right: 24px; }
+  .deepGreenHeader p { font-size: 8px; letter-spacing: .07em; }
+  .deepGreenHeader > svg { width: 22px; height: 22px; }
+  .deepGreen .deepGreenName { margin-top: 9px; font-size: 32px; }
+  .deepGreenAlias { margin-top: 3px; font-size: clamp(16px, 5.2cqw, 19px); }
+  .deepGreenDetails { margin-top: 9px; }
+  .deepGreenDetails li { gap: 7px; padding-block: 7px; font-size: 11px; }
+  .deepGreenDetails svg { width: 18px; height: 18px; }
+  .deepGreenAssociation { padding-top: 12px; font-size: 8px; }
+  .editorialPhoto { min-height: 282px; }
+  .editorialBody { padding: 22px 12%; }
+  .editorialBody > .rating { gap: 4px; }
+  .editorialBody .ratingLabel { display: none; }
+  .ticketSeal { padding-block: 7px; }
+  .ticketSeal svg { width: 19px; height: 19px; }
+  .ticketFooter { gap: 7px; }
+  .ticketMark { padding-left: 9px; font-size: 7px; }
+  .ticketMark > strong { font-size: 10px !important; }
+}

@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Composition du hero selon l'orientation de l'écran. */
+/* Chiffres jamais dans la police des titres (règle Tom N°0.12) : sous-ensemble Poppins en tête de pile. */
+@font-face { font-family: "Chiffres"; src: url("/fonts/chiffres-600.woff2") format("woff2"); font-weight: 100 650; unicode-range: U+25, U+2C, U+30-39, U+20AC; font-display: swap; }
+@font-face { font-family: "Chiffres"; src: url("/fonts/chiffres-700.woff2") format("woff2"); font-weight: 651 900; unicode-range: U+25, U+2C, U+30-39, U+20AC; font-display: swap; }
 
+@custom-variant land (@media (min-aspect-ratio: 1/1));
+
+/* Charte Taxi Gwada Vince (site actuel) : vert forêt #0A4624, or #DAB211, jaune logo #FFE178, menthe #E2F4EA.
+   Typo : Syne (titres, déjà utilisée par la marque, poussée en 800) + Poppins (texte). */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-vert: #0a4624;
+  --color-vert-900: #052814;
+  --color-vert-700: #13603a;
+  --color-or: #dab211;
+  --color-or-600: #b8930a;
+  --color-soleil: #ffe178;
+  --color-menthe: #e2f4ea;
+  --color-creme: #f7f5ee;
+  --color-encre: #0e1a12;
+  --color-gris: #4f5d54;
+  --font-display: "Chiffres", var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-creme);
+    color: var(--color-encre);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-display {
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+  img {
+    color: transparent;
+  }
+  ::selection {
+    background: var(--color-or);
+    color: var(--color-vert-900);
+  }
+  /* Safari iOS centre la date et l'heure natives et leur impose une largeur minimale qui fait déborder le champ. */
+  input[type="date"]::-webkit-date-and-time-value,
+  input[type="time"]::-webkit-date-and-time-value {
+    text-align: left;
+    margin: 0;
+  }
+  @supports (-webkit-touch-callout: none) {
+    input[type="date"],
+    input[type="time"] {
+      -webkit-appearance: none;
+      appearance: none;
+      min-width: 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  /* Ticket de course : encoches rondes sur les côtés */
+  .ticket-edge {
+    --r: 11px;
+    mask:
+      radial-gradient(circle var(--r) at 0 var(--notch, 50%), #0000 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle var(--r) at 100% var(--notch, 50%), #0000 98%, #000) right / 51% 100% no-repeat;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.75rem)); }
+}
+@keyframes dashmove {
+  to { stroke-dashoffset: -48; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hero : composition d'origine au ratio exact, texte entre le décor et le taxi.
+   Hauteur verrouillée en px par HeroLock (jamais vh / dvh). */
+.hero-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  container-type: inline-size;
+}
+.hero-box-d {
+  aspect-ratio: 2752 / 1536;
+  width: max(100%, calc(var(--hh, 100vh) * 1.7917));
+}
+.hero-box-m {
+  aspect-ratio: 1536 / 2752;
+  width: max(100%, calc(var(--hh, 100vh) * 0.5582));
+}
+/* Contours ajustés à chaque photo pour faire passer la voiture devant GWADA. */
+.hero-duster-cutout-d {
+  clip-path: polygon(49.583% 64.461%, 49.642% 60.619%, 50.119% 57.417%, 50.715% 55.176%, 52.682% 53.682%, 54.708% 52.401%, 54.589% 51.547%, 54.946% 50.907%, 56.019% 50.800%, 57.569% 47.919%, 60.012% 44.610%, 60.846% 43.650%, 62.038% 43.010%, 64.303% 42.796%, 64.601% 41.622%, 65.018% 41.302%, 67.461% 41.302%, 67.700% 42.156%, 67.878% 43.223%, 68.534% 43.223%, 69.249% 42.796%, 73.480% 42.796%, 74.434% 43.436%, 74.732% 44.397%, 75.685% 45.037%, 76.579% 46.852%, 77.473% 50.694%, 78.069% 52.508%, 78.665% 56.030%, 78.784% 59.979%, 78.248% 63.821%, 78.069% 65.422%, 77.235% 67.556%, 76.281% 68.196%, 75.328% 67.876%, 74.672% 66.275%, 68.653% 69.157%, 67.938% 71.932%, 67.163% 73.212%, 65.554% 73.426%, 64.720% 72.785%, 63.766% 70.544%, 54.589% 69.584%, 53.874% 70.544%, 52.682% 71.291%, 51.549% 70.971%, 50.715% 69.904%, 50.179% 68.090%);
+}
+.hero-duster-cutout-m {
+  clip-path: polygon(46.745% 61.919%, 47.172% 61.085%, 48.239% 60.906%, 52.615% 60.965%, 53.255% 61.561%, 53.575% 62.336%, 56.670% 62.455%, 57.311% 62.157%, 58.378% 62.038%, 59.445% 62.157%, 60.512% 62.694%, 60.939% 63.409%, 62.006% 64.243%, 63.501% 65.673%, 64.781% 67.878%, 67.449% 67.640%, 68.943% 67.521%, 70.544% 67.819%, 71.825% 68.415%, 71.718% 68.951%, 70.224% 69.368%, 67.236% 69.368%, 68.303% 70.620%, 69.691% 71.931%, 70.651% 73.897%, 71.078% 77.116%, 70.864% 80.810%, 69.904% 82.479%, 67.556% 82.837%, 64.461% 82.598%, 64.034% 81.347%, 36.073% 81.347%, 35.859% 82.539%, 34.258% 82.777%, 30.950% 82.718%, 29.883% 82.062%, 29.562% 80.513%, 29.136% 77.473%, 29.456% 74.493%, 30.523% 72.288%, 32.337% 70.560%, 33.298% 69.487%, 30.736% 69.428%, 29.349% 69.190%, 28.602% 68.594%, 28.815% 68.176%, 30.096% 67.759%, 32.231% 67.521%, 33.618% 67.640%, 34.045% 67.819%, 35.966% 65.197%, 37.353% 64.005%, 39.274% 62.992%, 39.915% 62.336%, 40.982% 62.098%, 42.369% 62.277%, 42.903% 62.694%, 46.638% 62.574%);
+}
+
+/* Services accueil (ordinateur) : la photo part de la vignette ronde (centre 2,75rem du bord gauche) et remplit la pastille. */
+.svc-pill-reveal {
+  clip-path: circle(2rem at 2.75rem 50%);
+  transition: clip-path 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.svc-pill-shade { opacity: 0; transition: opacity 0.5s ease; }
+.svc-pill:hover .svc-pill-reveal,
+.svc-pill:focus-visible .svc-pill-reveal { clip-path: circle(150% at 2.75rem 50%); }
+.svc-pill:hover .svc-pill-shade,
+.svc-pill:focus-visible .svc-pill-shade { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .svc-pill-reveal, .svc-pill-shade { transition: none; }
 }
