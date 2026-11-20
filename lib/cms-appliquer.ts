@@ -6,7 +6,7 @@ import { site } from "./site";
 import { TARIFS } from "./tarifs";
 import { services, reviews, steps, faq, type Faq } from "./content";
 import { faqSections, type FaqAnswer } from "./faq";
-import { accueil } from "./textes";
+import { accueil, tarifsPage, legal } from "./textes";
 import { cards } from "./services-cartes";
 
 type Txt = string | null | undefined;
@@ -16,6 +16,8 @@ export type CmsData = {
   accueil?: (Record<string, Txt | string[] | null | { titre?: Txt; texte?: Txt }[]> & { chauffeurPhoto?: Txt; atouts?: string[] | null; etapes?: { titre?: Txt; texte?: Txt }[] | null }) | null;
   prestations?: { cle?: Txt; titre?: Txt; sousTitre?: Txt; texte?: Txt; photo?: Txt; legende?: Txt; description?: Txt; pointsForts?: string[] | null }[] | null;
   avis?: { nom?: Txt; texte?: Txt }[] | null;
+  pageTarifs?: Record<string, Txt> | null;
+  infosLegales?: Record<string, Txt> | null;
   questions?: { rubrique?: Txt; q?: Txt; a?: Txt; surAccueil?: boolean | null; lienTexte?: Txt; lienAdresse?: Txt; motsCles?: Txt }[] | null;
 };
 
@@ -30,6 +32,8 @@ const DEF = {
   faq: clone(faq),
   sections: clone(faqSections.map((s) => s.items)),
   accueil: clone(accueil),
+  tarifsPage: clone(tarifsPage),
+  legal: clone(legal),
   cards: clone(cards),
 };
 
@@ -62,6 +66,8 @@ export function appliquerCms(data: CmsData | null | undefined) {
   remplacer(faq, clone(DEF.faq));
   faqSections.forEach((s, i) => remplacer(s.items, clone(DEF.sections[i])));
   Object.assign(accueil, clone(DEF.accueil));
+  Object.assign(tarifsPage, clone(DEF.tarifsPage));
+  Object.assign(legal, clone(DEF.legal));
   for (const k of Object.keys(cards)) cards[k] = clone(DEF.cards[k]);
   if (!data) return;
 
@@ -107,6 +113,13 @@ export function appliquerCms(data: CmsData | null | undefined) {
       if (ok(e?.titre)) steps[i].title = e.titre.trim();
       if (ok(e?.texte)) steps[i].text = e.texte.trim();
     });
+  }
+
+  // 4 bis. Page Tarifs & estimateur, informations légales : textes simples, même nom de champ que dans le code
+  for (const [cible, src] of [[tarifsPage, data.pageTarifs], [legal, data.infosLegales]] as const) {
+    if (!src) continue;
+    const C = cible as Record<string, string>;
+    for (const k of Object.keys(C)) if (ok(src[k])) C[k] = (src[k] as string).trim();
   }
 
   // 5. Prestations (accueil + page Tarifs & services), repérées par leur code

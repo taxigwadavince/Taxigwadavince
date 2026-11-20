@@ -5,7 +5,7 @@ const MDP = fs.readFileSync(process.env.HOME + "/.taxigwadavince-admin-password"
 const r = await fetch(U + "/api/admin/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ motDePasse: MDP }) });
 const cookie = r.headers.get("set-cookie").split(";")[0];
 const H = { cookie, "Content-Type": "application/json" };
-const sections = ["pageAccueil", "prestations", "tarifs", "questions", "avis", "reglages"];
+const sections = ["pageAccueil", "pageTarifs", "infosLegales", "prestations", "tarifs", "questions", "avis", "reglages"];
 const propre = (d) => JSON.parse(JSON.stringify(d, (k, v) => (["_rev", "_updatedAt", "_createdAt"].includes(k) ? undefined : v)));
 // normalise : clés triées, sans hotspot/crop (non gérés, sans effet sur le site)
 const norm = (v) => Array.isArray(v) ? v.map(norm) : v && typeof v === "object" ? Object.fromEntries(Object.keys(v).filter((k) => !["hotspot", "crop"].includes(k)).sort().map((k) => [k, norm(v[k])])) : v;

@@ -2,27 +2,28 @@ import type { Metadata } from "next";
 import { LegalPage, Todo } from "@/components/legal";
 import { gmailLink, site } from "@/lib/site";
 import { cmsServeur } from "@/lib/cms";
+import { legal } from "@/lib/textes";
 
 export const metadata: Metadata = { title: "Mentions légales", description: "Mentions légales du site Taxi Gwada Vince : éditeur, hébergeur et propriété intellectuelle.", alternates: { canonical: "/mentions-legales" } };
 
 export default async function Page() {
   await cmsServeur();
   return (
-    <LegalPage title="Mentions légales" updated="12 novembre 2026">
+    <LegalPage title="Mentions légales" updated={legal.majMentions}>
       <div>
         <h2>Éditeur du site</h2>
         <p>
-          Taxi Gwada Vince, exploité par Vincent <Todo>nom de famille</Todo>, <Todo>forme juridique (entrepreneur individuel, société…)</Todo>.
+          Taxi Gwada Vince, exploité par Vincent <Todo champ="nomFamille">nom de famille</Todo>, <Todo champ="formeJuridique">forme juridique (entrepreneur individuel, société…)</Todo>.
         </p>
         <ul>
           <li>Adresse : {site.address}, {site.city}, {site.region}</li>
           <li>Téléphone : <a href={site.phoneHref}>{site.phoneDisplay}</a></li>
           <li>E-mail : <a href={gmailLink("Contact")} target="_blank" rel="noreferrer">{site.email}</a></li>
-          <li>SIRET : <Todo>numéro SIRET</Todo></li>
-          <li>Numéro d&apos;autorisation de stationnement (licence de taxi) : <Todo>numéro et commune</Todo></li>
-          <li>TVA : <Todo>numéro de TVA intracommunautaire ou mention « TVA non applicable, art. 293 B du CGI »</Todo></li>
+          <li>SIRET : <Todo champ="siret">numéro SIRET</Todo></li>
+          <li>Numéro d&apos;autorisation de stationnement (licence de taxi) : <Todo champ="licence">numéro et commune</Todo></li>
+          <li>TVA : <Todo champ="tva">numéro de TVA intracommunautaire ou mention « TVA non applicable, art. 293 B du CGI »</Todo></li>
         </ul>
-        <p>Directeur de la publication : Vincent <Todo>nom de famille</Todo>.</p>
+        <p>Directeur de la publication : Vincent <Todo champ="nomFamille">nom de famille</Todo>.</p>
       </div>
       <div>
         <h2>Hébergement</h2>

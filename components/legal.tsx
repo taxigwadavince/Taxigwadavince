@@ -1,3 +1,4 @@
+import { legal } from "@/lib/textes";
 // INSPIRATION: skill audit-legal-site-fr (pages légales en dur, marqueurs explicites pour les données du client).
 export function LegalPage({ title, updated, children }: { title: string; updated: string; children: React.ReactNode }) {
   return (
@@ -15,6 +16,9 @@ export function LegalPage({ title, updated, children }: { title: string; updated
   );
 }
 
-export function Todo({ children }: { children: React.ReactNode }) {
+// Information à fournir par Vincent : affichée dès qu'elle est saisie dans /admin (Mentions légales), sinon marqueur visible.
+export function Todo({ champ, children }: { champ?: keyof typeof legal; children: React.ReactNode }) {
+  const v = champ ? legal[champ] : "";
+  if (v && v.trim()) return <>{v}</>;
   return <mark className="rounded bg-soleil/70 px-1.5 py-0.5 font-semibold text-vert-900">[À compléter : {children}]</mark>;
 }

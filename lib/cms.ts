@@ -8,6 +8,8 @@ const REQUETE = `{
   "reglages": *[_id == "reglages"][0],
   "tarifs": *[_id == "tarifs"][0],
   "accueil": *[_id == "pageAccueil"][0]{ ..., "chauffeurPhoto": chauffeurPhoto.asset->url },
+  "pageTarifs": *[_id == "pageTarifs"][0],
+  "infosLegales": *[_id == "infosLegales"][0],
   "prestations": *[_type == "prestation" && !(_id in path("drafts.**"))] | order(ordre asc){ cle, titre, sousTitre, texte, "photo": photo.asset->url, legende, description, pointsForts },
   "avis": *[_type == "avis" && !(_id in path("drafts.**"))] | order(ordre asc){ nom, texte },
   "questions": *[_type == "question" && !(_id in path("drafts.**"))] | order(ordre asc){ rubrique, q, a, surAccueil, lienTexte, lienAdresse, motsCles }

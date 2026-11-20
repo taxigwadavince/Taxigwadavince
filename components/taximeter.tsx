@@ -9,6 +9,7 @@ import { estimate, TARIFS, type Periode } from "@/lib/tarifs";
 import { Icon } from "./icons";
 import { Kicker, Reveal } from "./ui";
 import styles from "./taximeter.module.css";
+import { tarifsPage } from "@/lib/textes";
 
 const AIRPORT = placeById("aeroport")!;
 const KEYS = ["croisiere", "memorial-acte", "baie-mahault", "port-louis", "anse-bertrand", "sainte-rose", "bouillante", "saint-claude"];
@@ -161,7 +162,7 @@ export function Taximeter() {
           </Link>
         </Reveal>
 
-        <p className={styles.disclaimer}>Prix indicatifs depuis l’aéroport, hors temps supplémentaire, à confirmer avec Vincent.</p>
+        <p className={styles.disclaimer}>{tarifsPage.compteurNote}</p>
       </div>
     </section>
   );

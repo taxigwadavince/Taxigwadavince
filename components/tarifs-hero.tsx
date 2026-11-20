@@ -7,6 +7,7 @@ import { TARIFS } from "@/lib/tarifs";
 import { TaxiFront } from "./icons";
 import { Button, Kicker, Title } from "./ui";
 import { EASE, euro2 } from "@/lib/utils";
+import { tarifsPage as t } from "@/lib/textes";
 
 const FACTS = [
   { value: euro2(TARIFS.fraisDepart), label: "Prise en charge" },
@@ -32,9 +33,9 @@ export function TarifsHero() {
       <div className="relative mx-auto flex min-h-0 w-full max-w-[1280px] flex-1 flex-col justify-center gap-5 px-4 sm:grid sm:justify-normal sm:gap-y-10 sm:px-6 lg:w-full lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:grid-rows-[1fr_auto_auto_1fr] lg:gap-x-16 lg:gap-y-0 lg:px-8">
         <div className="lg:col-start-1 lg:row-start-2">
           <motion.div initial={reduce ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: EASE }}>
-            <Kicker icon="ph:receipt-bold">Tarifs & services</Kicker>
+            <Kicker icon="ph:receipt-bold">{t.heroKicker}</Kicker>
           </motion.div>
-          <Title as="h1" text="Des prix clairs, partout sur l'île" mark="clairs" center={false} className="mt-3 text-[clamp(2rem,9vw,2.3rem)] sm:mt-5 sm:text-[clamp(2.3rem,4.4vw,4rem)] lg:mt-6 [&_svg]:text-vert-700" />
+          <Title as="h1" text={t.heroTitre} mark={t.heroMot} center={false} className="mt-3 text-[clamp(2rem,9vw,2.3rem)] sm:mt-5 sm:text-[clamp(2.3rem,4.4vw,4rem)] lg:mt-6 [&_svg]:text-vert-700" />
         </div>
 
         <motion.div initial={reduce ? false : { opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.15, ease: EASE }} className="relative mb-6 flex max-h-[400px] min-h-[150px] w-full flex-1 flex-col sm:mb-4 sm:block sm:max-h-none sm:min-h-0 sm:flex-none lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:mb-0 lg:w-auto lg:self-center lg:justify-self-center">

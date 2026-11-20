@@ -1,10 +1,10 @@
-// Import initial : recopie dans Sanity le contenu actuel du site (createIfNotExists : relançable sans rien écraser).
+// Import : recopie dans Sanity le contenu du code (createIfNotExists + setIfMissing : relançable sans rien écraser).
 // Lancer depuis un dossier sans « : » : SANITY_PROJECT_ID=… SANITY_API_TOKEN=… npx tsx <chemin>/scripts/cms-import.mts
 import { site } from "../lib/site";
 import { TARIFS } from "../lib/tarifs";
 import { services, reviews, steps, faq } from "../lib/content";
 import { faqSections } from "../lib/faq";
-import { accueil } from "../lib/textes";
+import { accueil, tarifsPage, legal } from "../lib/textes";
 import { cards } from "../lib/services-cartes";
 
 const pid = process.env.SANITY_PROJECT_ID, tk = process.env.SANITY_API_TOKEN, ds = process.env.SANITY_DATASET ?? "production";
@@ -16,6 +16,8 @@ docs.push({ _id: "reglages", _type: "reglages", telephone: site.phoneDisplay, em
 docs.push({ _id: "tarifs", _type: "tarifs", fraisDepart: TARIFS.fraisDepart, kmJour: TARIFS.kmJour, kmNuit: TARIFS.kmNuit, heureAttente: TARIFS.heureSupp, minimum: TARIFS.minimum, forfaitAeroportBergevin: TARIFS.forfaitAeroportBergevin });
 const { chauffeurPhoto: _photo, atouts, ...textes } = accueil;
 docs.push({ _id: "pageAccueil", _type: "pageAccueil", ...textes, atouts, etapes: steps.map((s, i) => ({ _key: cle(i), titre: s.title, texte: s.text })) });
+docs.push({ _id: "pageTarifs", _type: "pageTarifs", ...tarifsPage });
+docs.push({ _id: "infosLegales", _type: "infosLegales", ...Object.fromEntries(Object.entries(legal).filter(([, v]) => v)) });
 services.forEach((s, i) => {
   const c = cards[s.id];
   docs.push({ _id: `prestation-${s.id}`, _type: "prestation", cle: s.id, ordre: i + 1, titre: s.title, sousTitre: s.tag, texte: s.text, legende: c?.caption, description: c?.description, pointsForts: c?.highlights });
@@ -33,6 +35,7 @@ for (const sec of faqSections) {
 const res = await fetch(`https://${pid}.api.sanity.io/v2024-10-01/data/mutate/${ds}`, {
   method: "POST",
   headers: { Authorization: `Bearer ${tk}`, "Content-Type": "application/json" },
-  body: JSON.stringify({ mutations: docs.map((d) => ({ createIfNotExists: JSON.parse(JSON.stringify(d)) })) }),
+  // createIfNotExists puis setIfMissing : ajoute les nouveaux champs sans jamais écraser une valeur déjà saisie
+  body: JSON.stringify({ mutations: docs.flatMap((d) => { const x = JSON.parse(JSON.stringify(d)); const { _id, _type, ...champs } = x; return [{ createIfNotExists: { _id, _type } }, { patch: { id: _id, setIfMissing: champs } }]; }) }),
 });
 console.log(res.status, docs.length, "documents", (await res.text()).slice(0, 200));

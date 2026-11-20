@@ -1,6 +1,25 @@
 // Textes de la page d'accueil, modifiables depuis /admin (Sanity, document « pageAccueil »).
 // Ces valeurs sont celles affichées tant qu'un champ reste vide dans l'espace de gestion.
 export const accueil = {
+  heroBoutonReserver: "Réserver ma course",
+  heroBoutonEstimer: "Estimer le prix",
+  servicesKicker: "Services",
+  servicesBouton: "Voir tous les services et tarifs",
+  departsKicker: "Départs",
+  departsBouton: "Estimer ma course",
+  reservationKicker: "Réservation",
+  reservationBouton: "Réserver en ligne",
+  chauffeurKicker: "Votre chauffeur",
+  chauffeurBouton: "Rencontrer Vincent",
+  membresLigne1: "Membre de l'Association",
+  membresLigne2: "des Taxis et de l'UNT",
+  avisKicker: "Avis Google",
+  avisNote: "5,0",
+  avisBouton: "Voir nos avis Google",
+  faqKicker: "Questions",
+  faqBouton: "Toutes les questions",
+  faqBoutonQuestion: "Poser ma question",
+  finBouton: "Réserver ma course",
   heroTitre: "Votre taxi en Guadeloupe,",
   heroAccent: "à l'heure, jour et nuit.",
   servicesTitre: "Un taxi pour chaque trajet",
@@ -22,4 +41,42 @@ export const accueil = {
   finTitre: "Une course à prévoir ?",
   finMot: "course",
   finTexte: "Envoyez votre demande et convenez de votre trajet avec Vincent. De jour comme de nuit.",
+};
+
+// Page Tarifs & services et page Estimateur (document « pageTarifs »).
+export const tarifsPage = {
+  heroKicker: "Tarifs & services",
+  heroTitre: "Des prix clairs, partout sur l'île",
+  heroMot: "clairs",
+  servicesTitre: "On vous emmène où ?",
+  servicesMot: "où",
+  grilleTitre: "Jour, nuit et forfait",
+  grilleMot: "forfait",
+  grilleIntro: "Des estimations selon votre trajet, à confirmer avec Vincent avant le départ.",
+  paiement: "Paiement à bord par carte bancaire ou en espèces, reçu remis.",
+  exemplesTitre: "Prix depuis l'aéroport",
+  exemplesMot: "l'aéroport",
+  exemplesNote: "Estimations depuis l'aéroport, hors temps supplémentaire. Prix final à confirmer avec Vincent.",
+  compteurNote: "Prix indicatifs depuis l’aéroport, hors temps supplémentaire, à confirmer avec Vincent.",
+  estimateurKicker: "Estimateur de course",
+  estimateurTitre: "Combien coûte votre trajet ?",
+  estimateurMot: "trajet",
+  estimateurIntro: "Départ, arrivée, date et heure : visualisez votre trajet et son prix indicatif, à confirmer avec Vincent.",
+  reperesTitre: "Les trajets les plus demandés",
+  reperesMot: "demandés",
+  reperesIntro: "Depuis l'aéroport Maryse Condé, en tarif de jour et de nuit.",
+};
+
+// Informations légales à compléter par Vincent (document « infosLegales »). Vide = marqueur « À compléter » visible.
+export const legal = {
+  nomFamille: "",
+  formeJuridique: "",
+  siret: "",
+  licence: "",
+  tva: "",
+  mediateur: "",
+  annulation: "",
+  majMentions: "12 novembre 2026",
+  majConfidentialite: "24 octobre 2026",
+  majCgv: "6 novembre 2026",
 };

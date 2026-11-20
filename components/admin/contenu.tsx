@@ -243,7 +243,7 @@ function Editeur({ section, docId, retour, setSale, signaler }: { section: Secti
         <h1 className="font-display text-[clamp(1.7rem,3vw,2.3rem)] leading-tight text-encre">{titreDoc || section.titre}</h1>
         {section.voir && <a href={section.voir} target="_blank" rel="noopener" className={btnClair}>Voir la page sur le site <Icon name="ph:arrow-up-right-bold" className="size-3.5 text-or-600" /></a>}
       </div>
-      <p className="mt-1 font-sans text-sm text-gris">Un champ laissé vide garde le texte prévu à l&apos;origine sur le site.</p>
+      <p className="mt-1 font-sans text-sm text-gris">{section.id === "infosLegales" ? "Tant qu’un champ est vide, le site affiche « À compléter » à sa place : remplissez-les tous." : "Un champ laissé vide garde le texte prévu à l’origine sur le site."}</p>
 
       {!initial ? (
         <p className="py-16 text-center font-sans text-gris">Chargement…</p>

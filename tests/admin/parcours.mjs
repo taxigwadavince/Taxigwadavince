@@ -45,6 +45,7 @@ await champ.fill("Votre taxi TEST en Guadeloupe,");
 await p.screenshot({ path: `${OUT}/3-editeur-accueil-ordi.png` });
 await p.click("button:has-text('Enregistrer')");
 await p.waitForSelector("text=Enregistré");
+await p.waitForTimeout(4000);
 await pub.goto(U + "/", { waitUntil: "networkidle" });
 log("titre modifié visible sur le site :", (await pub.locator("h1").first().textContent()).includes("TEST"));
 await champ.fill(original);
@@ -54,7 +55,7 @@ await pub.goto(U + "/", { waitUntil: "networkidle" });
 log("titre d'origine rétabli :", !(await pub.locator("h1").first().textContent()).includes("TEST"));
 
 // 4. Listes : services, questions, avis
-for (const s of ["Vos services", "Questions fréquentes", "Avis de voyageurs", "Vos tarifs", "Vos coordonnées"]) {
+for (const s of ["Vos services", "Questions fréquentes", "Avis de voyageurs", "Vos tarifs", "Page Tarifs et estimateur", "Mentions légales", "Vos coordonnées"]) {
   await p.click(`nav >> text=${s}`);
   await p.waitForTimeout(900);
   await p.screenshot({ path: `${OUT}/4-${s.replace(/\W+/g, "-")}-ordi.png` });

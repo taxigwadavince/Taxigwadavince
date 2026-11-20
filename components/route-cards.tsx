@@ -9,6 +9,7 @@ import { placeById } from "@/lib/places";
 import { estimate } from "@/lib/tarifs";
 import { Glyph, Icon } from "./icons";
 import { euro2, EASE } from "@/lib/utils";
+import { tarifsPage } from "@/lib/textes";
 
 const DAY = new Date("2026-11-03T10:00:00-04:00");
 const NIGHT = new Date("2026-11-03T22:00:00-04:00");
@@ -153,7 +154,7 @@ export function RouteCards() {
           </button>
         </div>
       </div>
-      <p className="mt-6 text-sm text-creme/85">Estimations depuis l&apos;aéroport, hors temps supplémentaire. Prix final à confirmer avec Vincent.</p>
+      <p className="mt-6 text-sm text-creme/85">{tarifsPage.exemplesNote}</p>
     </>
   );
 }

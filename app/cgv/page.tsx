@@ -4,13 +4,14 @@ import { site } from "@/lib/site";
 import { TARIFS } from "@/lib/tarifs";
 import { euro2 } from "@/lib/utils";
 import { cmsServeur } from "@/lib/cms";
+import { legal } from "@/lib/textes";
 
 export const metadata: Metadata = { title: "Conditions de réservation", description: "Conditions de réservation des courses Taxi Gwada Vince : estimation, confirmation, paiement à bord et annulation.", alternates: { canonical: "/cgv" } };
 
 export default async function Page() {
   await cmsServeur();
   return (
-    <LegalPage title="Conditions de réservation" updated="6 novembre 2026">
+    <LegalPage title="Conditions de réservation" updated={legal.majCgv}>
       <div>
         <h2>Objet</h2>
         <p>Ces conditions encadrent les demandes de réservation de courses de taxi effectuées auprès de Taxi Gwada Vince, en ligne, par téléphone ou par WhatsApp.</p>
@@ -32,7 +33,7 @@ export default async function Page() {
       <div>
         <h2>Annulation et retard</h2>
         <p>
-          Merci de prévenir le plus tôt possible en cas d&apos;annulation ou de changement d&apos;horaire. <Todo>délai d&apos;annulation sans frais et frais éventuels en cas d&apos;annulation tardive ou d&apos;absence</Todo>
+          Merci de prévenir le plus tôt possible en cas d&apos;annulation ou de changement d&apos;horaire. <Todo champ="annulation">délai d&apos;annulation sans frais et frais éventuels en cas d&apos;annulation tardive ou d&apos;absence</Todo>
         </p>
         <p>En cas de retard de votre vol ou de votre bateau, prévenez Vincent pour convenir de la nouvelle prise en charge et des conditions d&apos;attente.</p>
       </div>
@@ -42,7 +43,7 @@ export default async function Page() {
       </div>
       <div>
         <h2>Médiation de la consommation</h2>
-        <p>En cas de litige non résolu à l&apos;amiable, vous pouvez recourir gratuitement au médiateur de la consommation : <Todo>nom, adresse et site du médiateur</Todo>.</p>
+        <p>En cas de litige non résolu à l&apos;amiable, vous pouvez recourir gratuitement au médiateur de la consommation : <Todo champ="mediateur">nom, adresse et site du médiateur</Todo>.</p>
       </div>
       <div>
         <h2>Droit applicable</h2>

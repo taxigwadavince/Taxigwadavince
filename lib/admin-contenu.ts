@@ -34,9 +34,11 @@ export const SECTIONS: { titre: string; items: Section[] }[] = [
     items: [
       { id: "pageAccueil", type: "pageAccueil", titre: "Page d'accueil", aide: "Titres, textes et photo de l'accueil", icon: "ph:house-bold", voir: "/" },
       { id: "prestations", type: "prestation", titre: "Vos services", aide: "Aéroport, Bergevin, excursions, photos", icon: "ph:car-profile-bold", liste: { champTitre: "titre", champSousTitre: "sousTitre", ordre: "ordre" }, voir: "/tarifs" },
-      { id: "tarifs", type: "tarifs", titre: "Vos tarifs", aide: "Prise en charge, prix du km, forfait", icon: "ph:currency-eur-bold", voir: "/tarifs" },
+      { id: "tarifs", type: "tarifs", titre: "Vos tarifs", aide: "Prix utilisés par le calculateur et la page Tarifs", icon: "ph:currency-eur-bold", voir: "/estimateur" },
+      { id: "pageTarifs", type: "pageTarifs", titre: "Page Tarifs et estimateur", aide: "Titres et textes des deux pages", icon: "ph:calculator-bold", voir: "/tarifs" },
       { id: "questions", type: "question", titre: "Questions fréquentes", aide: "Ajouter, modifier ou retirer une question", icon: "ph:question-bold", liste: { champTitre: "q", champSousTitre: "rubrique", ordre: "ordre", creer: true, supprimer: true }, voir: "/faq" },
       { id: "avis", type: "avis", titre: "Avis de voyageurs", aide: "Les avis qui défilent sur l'accueil", icon: "ph:chat-circle-text-bold", liste: { champTitre: "nom", champSousTitre: "texte", ordre: "ordre", creer: true, supprimer: true }, voir: "/" },
+      { id: "infosLegales", type: "infosLegales", titre: "Mentions légales", aide: "Nom, SIRET, licence, TVA, médiateur", icon: "ph:seal-check-bold", voir: "/mentions-legales" },
       { id: "reglages", type: "reglages", titre: "Vos coordonnées", aide: "Téléphone, e-mail, adresse, avis Google", icon: "ph:address-book-bold", voir: "/" },
     ],
   },

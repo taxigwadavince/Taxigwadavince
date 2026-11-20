@@ -143,7 +143,7 @@ function Hero() {
               <Icon key={i} name="ph:star-fill" className="size-4" />
             ))}
           </span>
-          <span className="tabular">5,0 sur Google · {site.reviewsCount} avis</span>
+          <span className="tabular">{t.avisNote} sur Google · {site.reviewsCount} avis</span>
         </motion.p>
         <motion.h1 {...fade(0.35)} className="mt-3 max-w-[16ch] font-display text-[clamp(1.9rem,8vw,2.4rem)] font-bold text-white land:max-w-[15ch] land:text-[min(3.6vw,6.4vh)]" style={{ lineHeight: 1.02 }}>
           {t.heroTitre} <span className="text-soleil">{t.heroAccent}</span>
@@ -151,10 +151,10 @@ function Hero() {
         <motion.div {...fade(0.65)} className="mt-6 flex flex-wrap gap-3">
           <Cta href="/reserver" className="h-12 pl-5 land:h-13 land:pl-6">
             <span className="land:hidden">Réserver</span>
-            <span className="hidden land:inline">Réserver ma course</span>
+            <span className="hidden land:inline">{t.heroBoutonReserver}</span>
           </Cta>
           <Cta href="/estimateur" variant="verre" icon="ph:calculator-bold" className="h-12 pl-5 land:h-13 land:pl-6">
-            Estimer le prix
+            {t.heroBoutonEstimer}
           </Cta>
         </motion.div>
       </div>
@@ -171,12 +171,12 @@ export function Home() {
       {/* MCP: "hover image reveal list" -> Hover Image List (21st.dev #28258), voir components/services-index.tsx */}
       <section className="relative overflow-hidden bg-creme py-16 sm:py-24">
         <div className="px-4">
-          <SectionHead kicker="Services" kickerIcon="ph:steering-wheel-bold" title={t.servicesTitre} mark={t.servicesMot} />
+          <SectionHead kicker={t.servicesKicker} kickerIcon="ph:steering-wheel-bold" title={t.servicesTitre} mark={t.servicesMot} />
         </div>
         <ServicesIndex />
         <Reveal className="mt-10 flex justify-center px-4">
           <Cta href="/tarifs" variant="vert" className="w-full max-w-sm sm:w-auto">
-            Voir tous les services et tarifs
+            {t.servicesBouton}
           </Cta>
         </Reveal>
       </section>
@@ -184,14 +184,14 @@ export function Home() {
       {/* Départs : grille de cartes simple (retour Tom 26/10, tableau à volets jugé trop original), voir components/departure-board.tsx */}
       <section className="relative overflow-hidden bg-vert-900 bg-cover bg-center py-16 text-creme sm:py-24" style={{ backgroundImage:"url(/img/texture-vert.webp)" }}>
         <div className="px-4">
-          <SectionHead tone="sombre" kicker="Départs" kickerIcon="ph:paper-plane-tilt-bold" title={t.departsTitre} mark={t.departsMot} lead={t.departsIntro} />
+          <SectionHead tone="sombre" kicker={t.departsKicker} kickerIcon="ph:paper-plane-tilt-bold" title={t.departsTitre} mark={t.departsMot} lead={t.departsIntro} />
         </div>
         <div className="px-3">
           <DepartureBoard />
         </div>
         <Reveal className="mt-10 flex justify-center px-4">
           <Cta href="/estimateur" icon="ph:calculator-bold" className="w-full max-w-sm sm:w-auto">
-            Estimer ma course
+            {t.departsBouton}
           </Cta>
         </Reveal>
       </section>
@@ -199,12 +199,12 @@ export function Home() {
       {/* MCP: "timeline steps" -> Vertical How It Works Timeline (21st.dev #26902), voir components/road-steps.tsx */}
       <section className="grain relative bg-creme py-16 sm:py-24">
         <div className="px-4">
-          <SectionHead kicker="Réservation" kickerIcon="ph:calendar-blank-bold" title={t.reservationTitre} mark={t.reservationMot} />
+          <SectionHead kicker={t.reservationKicker} kickerIcon="ph:calendar-blank-bold" title={t.reservationTitre} mark={t.reservationMot} />
         </div>
         <RoadSteps />
         <Reveal className="mt-14 flex justify-center px-4">
           <Cta href="/reserver" variant="vert" className="w-full max-w-sm sm:w-auto">
-            Réserver en ligne
+            {t.reservationBouton}
           </Cta>
         </Reveal>
       </section>
@@ -228,16 +228,16 @@ export function Home() {
                 <img src="/img/membres/association-taxi-gwadloup.png" alt="Logo de l'association Taxi Gwadloup" className="size-11 shrink-0 rounded-full sm:size-12" />
                 <img src="/img/membres/unt-guadeloupe.png" alt="Logo de l'Union nationale des taxis (UNT)" className="h-9 w-auto shrink-0 sm:h-10" />
                 <span className="text-[0.74rem] leading-tight font-semibold text-vert-900 sm:text-sm">
-                  Membre de l&apos;Association
+                  {t.membresLigne1}
                   <br />
-                  des Taxis et de l&apos;UNT
+                  {t.membresLigne2}
                 </span>
               </div>
             </Reveal>
           </div>
           <div className="text-center lg:text-left">
             <Reveal>
-              <Kicker icon="ph:steering-wheel-bold">Votre chauffeur</Kicker>
+              <Kicker icon="ph:steering-wheel-bold">{t.chauffeurKicker}</Kicker>
             </Reveal>
             <Title text={t.chauffeurTitre} mark={t.chauffeurMot} center={false} className="mt-5 lg:mx-0" />
             <Reveal delay={0.1}>
@@ -257,7 +257,7 @@ export function Home() {
             </ul>
             <Reveal delay={0.3} className="mt-9 flex justify-center lg:justify-start">
               <Cta href="/equipe" variant="vert">
-                Rencontrer Vincent
+                {t.chauffeurBouton}
               </Cta>
             </Reveal>
           </div>
@@ -269,18 +269,18 @@ export function Home() {
         <div className="mx-auto max-w-3xl px-4 text-center">
           <Reveal>
             <Kicker tone="sombre" icon="ph:star-fill">
-              Avis Google
+              {t.avisKicker}
             </Kicker>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-5 font-sans text-[clamp(3rem,7vw,4.5rem)] leading-none font-bold text-soleil tabular">5,0</p>
+            <p className="mt-5 font-sans text-[clamp(3rem,7vw,4.5rem)] leading-none font-bold text-soleil tabular">{t.avisNote}</p>
           </Reveal>
           <Title tone="sombre" text={t.avisTitre} mark={t.avisMot} className="mt-3 text-[clamp(1.7rem,3.6vw,2.6rem)]" />
         </div>
         <ReviewsMarquee rows={1} />
         <Reveal className="mt-8 flex justify-center px-4">
           <Cta href={site.googleReviewsUrl} variant="or" icon="ph:arrow-up-right-bold" className="w-full max-w-sm sm:w-auto">
-            Voir nos avis Google
+            {t.avisBouton}
           </Cta>
         </Reveal>
       </section>
@@ -288,16 +288,16 @@ export function Home() {
       {/* MCP: "faq accordion" -> Accordion (21st.dev #23530), voir components/faq-list.tsx */}
       <section className="relative bg-creme py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-4">
-          <SectionHead kicker="Questions" kickerIcon="ph:info-bold" title={t.faqTitre} mark={t.faqMot} />
+          <SectionHead kicker={t.faqKicker} kickerIcon="ph:info-bold" title={t.faqTitre} mark={t.faqMot} />
           <Reveal className="mt-12">
             <FaqList items={faq.slice(0, 6)} />
           </Reveal>
           <Reveal className="mt-10 flex flex-wrap justify-center gap-3">
             <Cta href="/faq" variant="vert" className="w-full max-w-sm sm:w-auto">
-              Toutes les questions
+              {t.faqBouton}
             </Cta>
             <Cta href={whatsappLink("Bonjour Vincent, j'ai une question sur une course :")} variant="ligne" icon="si:whatsapp" className="w-full max-w-sm sm:w-auto">
-              Poser ma question
+              {t.faqBoutonQuestion}
             </Cta>
           </Reveal>
         </div>
@@ -313,7 +313,7 @@ export function Home() {
                 {t.finTexte}
               </Lead>
               <div className="mt-8 flex justify-center sm:justify-start">
-                <Cta href="/reserver">Réserver ma course</Cta>
+                <Cta href="/reserver">{t.finBouton}</Cta>
               </div>
             </div>
             <div className="mt-14 flex flex-col items-center gap-3 border-t border-white/15 pt-6 text-sm text-creme/85 sm:flex-row sm:flex-wrap sm:gap-8">
