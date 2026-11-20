@@ -32,7 +32,7 @@ export function WaysToBook() {
 
       <div className={styles.container}>
         <div className={styles.heading}>
-          <p className={styles.kicker}>02 — Conversation</p>
+          <p className={styles.kicker}>02 · Conversation</p>
           <h2 id="conversation-title" className={styles.title}>
             On en <span className={styles.mark}>parle
               <svg viewBox="0 0 240 26" preserveAspectRatio="none" aria-hidden="true">

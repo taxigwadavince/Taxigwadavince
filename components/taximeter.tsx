@@ -66,9 +66,9 @@ export function Taximeter() {
   };
 
   const name = dest ? placeById(dest)!.name : "À sélectionner";
-  const price = shown ? shown.price.toFixed(2).replace(".", ",") : "—";
-  const km = shown ? shown.km.toFixed(1).replace(".", ",") : "—";
-  const minutes = shown ? String(shown.min) : "—";
+  const price = shown ? shown.price.toFixed(2).replace(".", ",") : "-";
+  const km = shown ? shown.km.toFixed(1).replace(".", ",") : "-";
+  const minutes = shown ? String(shown.min) : "-";
   const message = status === "libre"
     ? "Choisissez une destination pour afficher le prix."
     : status === "calcul"

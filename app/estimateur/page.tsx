@@ -10,7 +10,7 @@ import { tarifsPage as t } from "@/lib/textes";
 
 export const metadata: Metadata = {
   title: "Estimer le prix d'une course de taxi en Guadeloupe",
-  description: "Estimez votre trajet de taxi en Guadeloupe : forfait aéroport–Bergevin, tarifs de jour, de nuit, dimanches et jours fériés. Prix à confirmer avec Vincent.",
+  description: "Estimez votre trajet de taxi en Guadeloupe : forfait aéroport ↔ Bergevin, tarifs de jour, de nuit, dimanches et jours fériés. Prix à confirmer avec Vincent.",
   alternates: { canonical: "/estimateur" },
 };
 

@@ -8,7 +8,7 @@ import { guadeloupeParts, isGuadeloupeHoliday } from "./guadeloupe-time";
 // - heure d'attente ou marche lente : 25,04 € maximum ;
 // - course minimum, suppléments compris : 8 € ;
 // - valeur de la chute : 0,10 € (le prix progresse par pas de 0,10 €, jamais au-dessus du compteur).
-// Forfait aéroport–Bergevin : 30 € (page /services/ de taxigwadavince.com).
+// Forfait aéroport ↔ Bergevin : 30 € (page /services/ de taxigwadavince.com).
 // Tous les montants restent indicatifs et soumis à confirmation.
 export const TARIFS = {
   forfaitAeroportBergevin: 30,

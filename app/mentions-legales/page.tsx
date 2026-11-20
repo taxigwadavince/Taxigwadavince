@@ -49,7 +49,7 @@ export default async function Page() {
       </div>
       <div>
         <h2>Estimations de prix</h2>
-        <p>Les prix affichés par l&apos;estimateur sont indicatifs et soumis à confirmation finale par le chauffeur, y compris les modalités du forfait aéroport–Bergevin et des options demandées.</p>
+        <p>Les prix affichés par l&apos;estimateur sont indicatifs et soumis à confirmation finale par le chauffeur, y compris les modalités du forfait aéroport ↔ Bergevin et des options demandées.</p>
       </div>
     </LegalPage>
   );

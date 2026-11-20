@@ -5,7 +5,7 @@ import { Icon } from "@/components/icons";
 import { driverCardStyles } from "@/lib/driver-card-styles";
 
 export const metadata: Metadata = {
-  title: "Quatre styles de carte chauffeur — Aperçu",
+  title: "Quatre styles de carte chauffeur | Aperçu",
   robots: { index: false, follow: false },
 };
 
