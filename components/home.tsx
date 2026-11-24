@@ -33,7 +33,8 @@ function GiantWordMobile({ className, size }: { className: string; size: string 
   const letters = "GWADA".split("");
   return (
     <div className={className} aria-hidden="true">
-      <div className="flex font-display leading-[0.86] font-extrabold tracking-[-0.03em] text-soleil" style={{ fontSize: size }}>
+      <div className="relative flex font-display leading-[0.86] font-extrabold tracking-[-0.03em] text-soleil [text-shadow:0_2px_8px_rgba(5,40,20,0.55)]" style={{ fontSize: size }}>
+        <span aria-hidden="true" className="pointer-events-none absolute top-1/2 left-1/2 h-[2.4em] w-[135%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(5,40,20,0.78)_0%,rgba(5,40,20,0.5)_36%,rgba(5,40,20,0)_68%)]" />
         {letters.map((l, i) => (
           <span key={i} className="relative inline-block">
             <span className="block overflow-hidden">
