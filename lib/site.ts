@@ -3,7 +3,7 @@ export const site = {
   name: "Taxi Gwada Vince",
   shortName: "Gwada Vince",
   driver: "Vincent",
-  url: "https://taxi-gwada-vince-eight.vercel.app",
+  url: "https://www.taxigwadavince.com",
   phoneDisplay: "0690 64 75 63",
   phoneIntl: "+590690647563",
   phoneHref: "tel:+590690647563",
