@@ -7,12 +7,13 @@ import { TARIFS } from "@/lib/tarifs";
 import { Icon } from "./icons";
 import { euro2, EASE } from "@/lib/utils";
 
-const panels = [
+const getPanels = () => [
   { id: "jour", icon: "ph:sun-bold", title: "Tarif de jour", when: "7 h à 19 h, hors dimanches et jours fériés", km: TARIFS.kmJour, tone: "bg-soleil text-vert-900" },
   { id: "nuit", icon: "ph:moon-bold", title: "Tarif de nuit", when: "19 h à 7 h, dimanches et jours fériés", km: TARIFS.kmNuit, tone: "bg-vert-900 text-creme" },
 ];
 
 export function TariffPanels() {
+  const panels = getPanels(); // lu au rendu : suit les prix saisis dans /admin
   return (
     <div className="mx-auto mt-14 max-w-[1100px] px-4">
       <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden">

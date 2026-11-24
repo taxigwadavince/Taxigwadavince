@@ -7,7 +7,8 @@ import { Glyph, Icon } from "./icons";
 import { EASE } from "@/lib/utils";
 import styles from "./driver-services.module.css";
 
-const ITEMS = [
+// Fonction : relue à chaque rendu pour suivre les coordonnées saisies dans /admin
+const ITEMS = () => [
   { glyph: "plane", title: "Transferts aéroport", text: "De Pôle Caraïbes à votre hôtel, votre gîte ou le port.", href: "/estimateur?from=aeroport" },
   { glyph: "road", title: "Toutes les communes", text: "Vos trajets partout en Guadeloupe, de la Basse-Terre à la Grande-Terre.", href: "/estimateur" },
   { glyph: "palm", title: "Excursions sur mesure", text: "Découvrez l’île à votre rythme avec un chauffeur local.", href: "/tarifs#services" },
@@ -31,7 +32,7 @@ export function DriverServices() {
         </header>
 
         <ul className={styles.services}>
-          {ITEMS.map((item, i) => {
+          {ITEMS().map((item, i) => {
             const external = item.href.startsWith("http") || item.href.startsWith("tel:");
             const body = (
               <>

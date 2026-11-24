@@ -2,7 +2,8 @@ import { gmailLink, site, whatsappLink } from "@/lib/site";
 import { Icon } from "./icons";
 import styles from "./ways-to-book.module.css";
 
-const ways = [
+// Fonction : relue à chaque rendu pour suivre les coordonnées saisies dans /admin
+const ways = () => [
   { tone: "phone", icon: "ph:phone-bold", title: "Appeler Vincent", text: "Pour une course dans l’heure.", href: site.phoneHref, cta: site.phoneDisplay },
   { tone: "whatsapp", icon: "si:whatsapp", title: "Écrire sur WhatsApp", text: "Pour échanger sur votre trajet.", href: whatsappLink("Bonjour Vincent, je souhaite réserver une course :"), cta: "Ouvrir WhatsApp" },
   { tone: "email", icon: "ph:envelope-simple-bold", title: "Envoyer un e-mail", text: "Pour un séjour, un groupe ou un mariage.", href: gmailLink("Demande de réservation"), cta: site.email },
@@ -43,7 +44,7 @@ export function WaysToBook() {
         </div>
 
         <ul className={styles.ways}>
-          {ways.map((way) => {
+          {ways().map((way) => {
             const external = way.href.startsWith("http");
             return (
               <li key={way.tone} className={`${styles.bubble} ${styles[way.tone]}`}>

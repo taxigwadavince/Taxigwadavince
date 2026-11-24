@@ -7,7 +7,8 @@ import { DEFAULT_DRIVER_CARD_STYLE, type DriverCardStyle } from "@/lib/driver-ca
 import { Icon, TaxiFront } from "./icons";
 import styles from "./driver-card.module.css";
 
-const rows = [
+// Fonction : relue à chaque rendu pour suivre les coordonnées saisies dans /admin
+const rows = () => [
   { label: "Nom", value: "Vincent" },
   { label: "Dit", value: "« Gwada Vince »" },
   { label: "Basé au", value: "Gosier (97190)" },
@@ -73,7 +74,7 @@ export function DriverCard({ variant = DEFAULT_DRIVER_CARD_STYLE }: { variant?: 
                 <span className={styles.hologram} aria-hidden="true"><TaxiFront /></span>
               </div>
               <dl className={styles.details}>
-                {rows.map((row) => (
+                {rows().map((row) => (
                   <div key={row.label}>
                     <dt>{row.label}</dt><dd>{row.value}</dd>
                   </div>

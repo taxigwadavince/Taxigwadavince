@@ -12,7 +12,8 @@ import { Button, Kicker, Title } from "./ui";
 import { cn, EASE } from "@/lib/utils";
 
 // short : libellé des pastilles compactes sur téléphone.
-const BADGES = [
+// Fonction : relue à chaque rendu pour suivre les coordonnées saisies dans /admin
+const BADGES = () => [
   { icon: "ph:seal-check-bold", text: "Membre de l'Association des Taxis de la Guadeloupe", short: "Association des Taxis de la Guadeloupe" },
   { icon: "ph:star-fill", text: `${site.rating.toFixed(1).replace(".", ",")} sur ${site.reviewsCount} avis Google` },
   { icon: "ph:clock-bold", text: "24h/24, 7j/7, même en dernière minute", short: "24h/24, 7j/7" },
@@ -45,7 +46,7 @@ export function DriverHero({ cardStyle = DEFAULT_DRIVER_CARD_STYLE, preview = fa
           </motion.p>
 
           <motion.ul {...up(0.3)} className="mt-5 flex max-w-xl flex-wrap gap-2 sm:mt-6 sm:grid">
-            {BADGES.map((b) => (
+            {BADGES().map((b) => (
               <li key={b.text} className="flex items-center gap-2 rounded-full bg-white/10 py-1.5 pr-3.5 pl-1.5 text-[0.8rem] font-medium text-creme ring-1 ring-white/15 backdrop-blur-sm sm:gap-3 sm:rounded-2xl sm:px-4 sm:py-2.5 sm:text-[0.95rem]">
                 <span className="grid size-6 shrink-0 place-items-center rounded-full bg-or text-vert-900 sm:size-8">
                   <Icon name={b.icon} className="size-3.5 sm:size-4.5" />

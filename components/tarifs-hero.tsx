@@ -9,13 +9,14 @@ import { Button, Kicker, Title } from "./ui";
 import { EASE, euro2 } from "@/lib/utils";
 import { tarifsPage as t } from "@/lib/textes";
 
-const FACTS = [
+const getFacts = () => [
   { value: euro2(TARIFS.fraisDepart), label: "Prise en charge" },
   { value: euro2(TARIFS.kmJour), label: "Le km de jour" },
   { value: euro2(TARIFS.kmNuit), label: "Le km de nuit" },
 ];
 
 export function TarifsHero() {
+  const FACTS = getFacts(); // lu au rendu : suit les prix saisis dans /admin
   const reduce = useReducedMotion();
   return (
     // Sur ordinateur, le bandeau occupe la hauteur de l'écran (barre de navigation comprise) : la photo s'adapte à la hauteur.

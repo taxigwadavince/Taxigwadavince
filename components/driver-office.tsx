@@ -18,7 +18,8 @@ function arc(from: number, to: number) {
   return `M ${pt(from)} A 48 48 0 0 1 ${pt(to)}`;
 }
 
-const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.address} ${site.city} ${site.region}`)}`;
+// Fonction : relue à chaque rendu pour suivre les coordonnées saisies dans /admin
+const mapsHref = () => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.address} ${site.city} ${site.region}`)}`;
 
 export function DriverOffice() {
   const reduce = useReducedMotion();
@@ -86,7 +87,7 @@ export function DriverOffice() {
         {/* Adresse et e-mail */}
         <Reveal dir="right" delay={0.1} className="lg:order-1">
           <div className="mx-auto grid w-fit gap-7 lg:mx-0">
-            <a href={mapsHref} target="_blank" rel="noreferrer" className="flex items-start gap-4 text-vert-900 transition-colors hover:text-vert">
+            <a href={mapsHref()} target="_blank" rel="noreferrer" className="flex items-start gap-4 text-vert-900 transition-colors hover:text-vert">
               <Icon name="ph:map-pin-fill" className="mt-0.5 size-9 shrink-0 text-vert" />
               <span className="font-display text-[1.25rem] leading-snug font-bold sm:text-[1.4rem]">
                 {site.address},
